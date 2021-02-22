@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Text, TextInput } from 'react-native'
+import { Button, Text, TextInput, View } from 'react-native'
 import Estilo from '../estilo'
+
+import MegaNumero from './MegaNumero'
 
 export default class Mega extends Component {
     
@@ -22,26 +24,42 @@ export default class Mega extends Component {
 
     gerarNumeros = (qtde) => {
 
-        const verificaArray = (temp) => {
-            if(1==2) {
+        const verificaArray = (temp, num) => {
 
-                return true
+            let flag = false;
+
+            for (let i = 0; i < temp.length; i++) {
+                if(num == temp[i]) {
+                    flag = true
+                    break
+                }
             }
-            else return false
+            return flag
         }
 
         let temp = []
+        let num
 
         for (let c = 0; c < qtde; c++){
 
-            let num = Math.floor(((60) * Math.random()) + 1)
+            do {
+                num = Math.floor(((60) * Math.random()) + 1)
+            }
+            while(verificaArray(temp, num))
+
             temp.push(num)
         }
 
         this.setState({numeros: temp.sort((a,b) => {
             return a-b
         })})
-        console.warn(verificaArray(temp))
+    }
+
+    exibirNumeros = () => {
+        const nums = this.state.numeros
+        return nums.map(num => {
+            return <MegaNumero  key={num} num={num} />
+        })
     }
 
     render() {
@@ -49,7 +67,6 @@ export default class Mega extends Component {
             <>
             <Text style={Estilo.txtG}>
                 Gerador de Mega-Sena{' '}
-                {this.state.qtdeNumeros}
             </Text>
             <TextInput
             keyboardType="numeric"
@@ -58,9 +75,14 @@ export default class Mega extends Component {
                 value={`${this.state.qtdeNumeros}`}
                 onChangeText={/*qtde => this.alterarQtdeNumeros(qtde)*/this.alterarQtdeNumeros}
             />
-            <Text>
-                {this.state.numeros.join([separador = ','])}
-            </Text>
+            <View style={{
+                marginTop: 20,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'center'
+            }}>
+                {this.exibirNumeros()}
+            </View>
             </>
         )
     }
