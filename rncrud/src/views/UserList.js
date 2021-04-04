@@ -5,14 +5,17 @@ import UsersContext from '../context/UsersContext'
 
 export default props => {
 
-    const { state } = useContext(UsersContext)
+    const { state, dispatch } = useContext(UsersContext)
 
     function confirmUserDeletion(user){
         Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
             {
                 text: 'Sim',
                 onPress() {
-                    console.warn('delete' + user.id)
+                    dispatch({
+                        type: 'deleteUser',
+                        payload: user,
+                    })
                 }
             },
             {
@@ -33,7 +36,7 @@ export default props => {
                     <ListItem.Title>{user.name}</ListItem.Title>
                     <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
-                <ListItem.Chevron name='edit' color='orange' size={25} onPress={() => console.warn('edição')}/>
+                <ListItem.Chevron name='edit' color='orange' size={25} onPress={() => props.navigation.navigate('UserForm', user)}/>
                 <ListItem.Chevron name='delete' color='red' size={25} onPress={() => confirmUserDeletion(user)} />
             </ListItem>
         )
