@@ -7,10 +7,10 @@ export default [
             'https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635449_960_720.png',
     },
     {
-        id: 2,
-        name: 'Beatriz Beta',
-        email: 'beatriz.beta@gmail.com',
-        avatarUrl: 
+    id: 2,
+    name: 'Beatriz Beta',
+    email: 'beatriz.beta@gmail.com',
+    avatarUrl: 
             'https://cdn.pixabay.com/photo/2016/09/01/08/25/smiley-1635456_960_720.png',
     },
     {
