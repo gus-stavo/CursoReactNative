@@ -38,13 +38,16 @@ export default class AddTask extends Component {
         this.setState({ ...initialState })
     }
 
+    setDate = date => {
+        date = date ? date : new Date()
+        this.setState({ date, showDatePicker: false })
+        
+    }
+
     getDatePicker = () => {
         let datePicker = <DateTimePicker value={this.state.date}
-            onChange={(_, date) => this.setState({ date, showDatePicker: false })}
+            onChange={(_, date) => this.setDate(date)}
             mode='date' />
-
-        /*const date = this.state.date ? this.state.date : new Date()
-        this.setState({ date })*/
 
         const dateString = moment(this.state.date).format('ddd, D [de] MMMM [de] YYYY')
 
