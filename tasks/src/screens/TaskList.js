@@ -33,18 +33,17 @@ export default class TaskList extends Component {
         ...initialState
     }
 
-    componentDidMount = () => {
-        this.filterTasks()
-        //const stateString = await AsyncStorage.getItem('tasksState')
-        //const state = JSON.parse(stateString) || initialState
-        //this.setState(state, this.filterTasks)
+    componentDidMount = async () => {
+        const stateString = await AsyncStorage.getItem('tasksState')
+        const state = JSON.parse(stateString) || initialState
+        this.setState(state, this.filterTasks)
     }
 
     toggleFilter = () => {
         this.setState({ showDoneTasks: !this.state.showDoneTasks }, this.filterTasks)
     }
 
-    filterTasks = () => {
+    filterTasks = async () => {
         let visibleTasks = null
         if (this.state.showDoneTasks) {
             visibleTasks = [...this.state.tasks]
@@ -54,7 +53,7 @@ export default class TaskList extends Component {
         }
 
         this.setState({ visibleTasks })
-        //AsyncStorage.setItem('tasksState', JSON.stringify(this.state))
+        await AsyncStorage.setItem('tasksState', JSON.stringify(this.state))
     }
 
     toggleTask = taskId => {

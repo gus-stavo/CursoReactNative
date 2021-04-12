@@ -33,10 +33,18 @@ export default class AddTask extends Component {
         this.setState({ ...initialState }) 
     }
 
+    cancel = () => {
+        this.props.onCancel()
+        this.setState({ ...initialState })
+    }
+
     getDatePicker = () => {
         let datePicker = <DateTimePicker value={this.state.date}
             onChange={(_, date) => this.setState({ date, showDatePicker: false })}
             mode='date' />
+
+        /*const date = this.state.date ? this.state.date : new Date()
+        this.setState({ date })*/
 
         const dateString = moment(this.state.date).format('ddd, D [de] MMMM [de] YYYY')
 
@@ -73,7 +81,7 @@ export default class AddTask extends Component {
                         onChangeText={desc => this.setState({ desc })} />
                     {this.getDatePicker()}
                     <View style={styles.buttons}>
-                        <TouchableOpacity onPress={this.props.onCancel}>
+                        <TouchableOpacity onPress={this.cancel}>
                             <Text style={styles.button}>Cancelar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.save}>
