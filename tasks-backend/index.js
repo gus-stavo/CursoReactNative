@@ -1,31 +1,16 @@
 const express = require('express')
 const app = express()
-/*const bodyParser = require('body-parser')
+const db = require('./config/db')
+const consign = require('consign')
 
-app.use(meuJson())
-app.use(bodyParser.json())
+consign()
+    .include('./config/passport.js')
+    .then('./config/middlewares.js')
+    .then('./api')
+    .then('./config/routes.js')
+    .into(app)
 
-function meuJson() {
-    return (req, res, next) => {
-        console.log('Antes de tudo: Meu middleware...')
-        next()
-    }
-}
-
-app.post('/blabla/:valor', (req, res, next) => {
-    console.log('Func 0')
-    next()
-})
-
-app.post('/blabla/:valor', (req, res, next) => {
-    console.log('Func 1')
-    res.status(200).send('Meu Backend = ' 
-        + JSON.stringify(req.body.dependentes[0].nome))
-})
-
-app.post('/blabla/:valor', (req, res) => {
-    console.log('Func 3')
-})*/
+app.db = db
 
 app.listen(3000, () => {
     console.log('Backend executando...')
