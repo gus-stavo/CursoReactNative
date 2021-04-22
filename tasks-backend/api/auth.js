@@ -7,7 +7,7 @@ module.exports = app => {
         if (!req.body.email || !req.body.password) return res.status(400).send('Dados incompletos!')
 
         const user = await app.db('users')
-            .whereRaw("email = LOWER(?)", req.body.email)
+            .where({ email: req.body.email })
             .first()
 
         if (user) {

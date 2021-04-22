@@ -10,7 +10,7 @@ consign()
     .then('./config/routes.js')
     .into(app)
 
-app.db = db 
+app.db = db
 
 app.listen(3000, () => {
     console.log('Backend executando...')
