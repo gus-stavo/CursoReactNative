@@ -28,16 +28,16 @@ const DrawerNavigator = props => {
         <Drawer.Navigator drawerContentOptions={menuConfig}
             drawerContent={(props) => <Menu {...props} email={email} name={name} />}>
             <Drawer.Screen name='Today' options={{ title: 'Hoje' }}>
-                {props => {<TaskList title='Hoje' daysAhead={0} {...props} />}}
+                {props => <TaskList title='Hoje' daysAhead={0} {...props} />}
             </Drawer.Screen>
             <Drawer.Screen name='Tomorrow' options={{ title: 'Amanhã' }}>
-                {props => {<TaskList title='Amanhã' daysAhead={1} {...props} />}}
+                {props => <TaskList title='Amanhã' daysAhead={1} {...props} />}
             </Drawer.Screen>
             <Drawer.Screen name='Week' options={{ title: 'Semana' }}>
-                {props => {<TaskList title='Semana' daysAhead={7} {...props} />}}
+                {props => <TaskList title='Semana' daysAhead={7} {...props} />}
             </Drawer.Screen>
             <Drawer.Screen name='Month' options={{ title: 'Mês' }}>
-                {props => {<TaskList title='Mês' daysAhead={30} {...props} />}}
+                {props => <TaskList title='Mês' daysAhead={30} {...props} />}
             </Drawer.Screen>
         </Drawer.Navigator>
     )
